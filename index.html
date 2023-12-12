@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Movie Recommendation System</title>
+    <style>
+        body{
+          margin:0 0 0 0;
+        }
+        .App{
+          margin-left: 35%;
+          margin-top: 7%;
+          display: inherit;
+        }
+        .Recommendation{
+          margin-left: 7%;
+          margin-top: 4%;
+          color: gainsboro;
+          font-family: cursive;
+        }
+        form{
+          margin-top: 5%;
+          margin-left: 3%;
+        }
+        .page{
+          background-image: url(static/recommender.jpg);
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+          background-size: 100% 100%;
+          height: 100%;
+          width: 100%;
+          position: absolute;
+        }
+        h1{
+          color: burlywood;
+          font-weight: 600;
+        }
+        .button{
+          background-color: darkcyan;
+          border: 1px solid;
+        }
+        label{
+          color: #7dc77d;
+          font-size: x-large;
+          font-weight: bold;
+        }
+        li{
+          font-weight: 700;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="App">
+        <h1>Movie Recommendation System</h1>
+        <form method="POST">
+          <label for="movie">Enter a movie title:</label>
+          <input type="text" name="movie" id="movie" />
+          <input class="button" type="submit" value="Submit" />
+        </form>
+
+        <!-- errors -->
+        {% with messages = get_flashed_messages() %} {% if messages %}
+        <div>{{messages[0]}}</div>
+        {% endif %} {% endwith %}
+		<div class="Recommendation">
+			<ul>
+				{% for movie_id, movie_title, predicted_rating in movie_ratings %}
+				<li>{{ movie_title }} - Predicted Rating: {{ "%.2f"|format(predicted_rating|float) }}</li>
+				{% endfor %}
+			</ul>
+		</div>
+      </div>
+  </div>
+  </body>
+</html>
